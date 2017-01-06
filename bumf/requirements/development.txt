@@ -1,0 +1,4 @@
+isort
+pylama
+pytest==3.0.*
+pytest-django==3.1.*
