@@ -1,0 +1,18 @@
+# Project specific
+.secret
+
+# Python specific
+__pycache__/
+*.py[cod]
+
+# Database specific
+*.db
+*.sqlite3
+
+# Development files
+.coverage
+env/
+
+# General tempfiles
+*~
+*.sw[po]
