@@ -1,0 +1,2 @@
+django-extensions
+pytest-cov==2.4.*
