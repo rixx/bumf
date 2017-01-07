@@ -5,7 +5,6 @@ from django.db import models
 from bumf.core.models.utils import Choices
 
 
-
 class VirtualAccountVariantChoices(Choices):
     """
     There is one main virtual account type, the budget account, used for budget
