@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.db import models
 
+from bumf.core.models.utils import Choices
 
-class ProjectScopeChoices:
+
+class ProjectScopeChoices(Choices):
     PRIVATE = 'private'
     BUSINESS = 'business'
 
-    @classmethod
-    def get_choices(cls):
-        return ((val, val) for val in [cls.PRIVATE, cls.BUSINESS])
+    valid_choices = [PRIVATE, BUSINESS]
 
 
 class Project(models.Model):
