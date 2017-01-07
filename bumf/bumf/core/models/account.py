@@ -61,3 +61,33 @@ class VirtualAccount(models.Model):
     comment = models.CharField(
         max_length=1000, null=True, blank=True,
     )
+
+
+class RealAccountVariantChoices(Choices):
+    BANK_ACCOUNT = 'bank'
+    CASH = 'cash'
+
+    valid_choices = [
+        BANK_ACCOUNT, CASH,
+    ]
+
+
+class RealAccount(models.Model):
+    """
+    Real accounts mirror actual bank accounts (or wallets, or other assets).
+    """
+    name = models.CharField(
+        max_length=120,
+        verbose_name='Name',
+    )
+    project = models.ForeignKey(
+        to='Project',
+        on_delete=models.PROTECT,
+        related_name='real_accounts',
+    )
+    variant = models.CharField(
+        max_length=RealAccountVariantChoices.get_max_length(),
+        default=RealAccountVariantChoices.BANK_ACCOUNT,
+        choices=RealAccountVariantChoices.get_choices(),
+    )
+    import_transactions = models.BooleanField(default=False)
