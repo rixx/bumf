@@ -1,5 +1,7 @@
 from decimal import Decimal
+from functools import partial
 
+from django.core.exceptions import ValidationError
 from django.db import models
 
 from bumf.core.models.utils import Choices
@@ -31,6 +33,16 @@ class VirtualAccountVariantChoices(Choices):
     valid_choices = [
         BUDGET, LIABILITY, INCOME, EXPENSE,
     ]
+
+
+def validate_variant(variant, value):
+    if not value == variant:
+        raise ValidationError(f'The object\'s variant is "{value}", but "{variant}" is required!')
+
+
+validate_budget_account = partial(validate_variant, VirtualAccountVariantChoices.BUDGET)
+validate_income_account = partial(validate_variant, VirtualAccountVariantChoices.INCOME)
+validate_expense_account = partial(validate_variant, VirtualAccountVariantChoices.EXPENSE)
 
 
 class VirtualAccount(models.Model):
