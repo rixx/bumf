@@ -1,0 +1,15 @@
+*.log
+*.log.*
+
+node_modules
+public
+dist
+
+config.dev.js
+config.testing.js
+.publish
+.idea
+
+npm-debug.log
+test/e2e/reports
+selenium-debug.log
