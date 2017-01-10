@@ -40,17 +40,17 @@ class Project(models.Model):
     )
     default_budget_account = models.ForeignKey(
         to='VirtualAccount', null=True, blank=True,
-        related_name='+',
+        related_name='+',  # Do not create a reverse lookup
         validators=[validate_budget_account, ]
     )
     default_income_account = models.ForeignKey(
         to='VirtualAccount', null=True, blank=True,
-        related_name='+',
+        related_name='+',  # Do not create a reverse lookup
         validators=[validate_income_account, ]
     )
     default_expense_account = models.ForeignKey(
         to='VirtualAccount', null=True, blank=True,
-        related_name='+',
+        related_name='+',  # Do not create a reverse lookup
         validators=[validate_expense_account, ]
     )
 
