@@ -34,7 +34,13 @@ BASE_APPS = [
     'django.contrib.staticfiles',
 ]
 
+EXTERNAL_APPS = [
+    'rest_framework',
+    'rest_framework.authtoken',
+]
+
 LOCAL_APPS = [
+    'bumf.api',
     'bumf.core',
 ]
 
@@ -109,3 +115,14 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
+
+#### App configuration
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
