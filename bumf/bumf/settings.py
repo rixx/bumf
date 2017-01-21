@@ -38,7 +38,13 @@ LOCAL_APPS = [
     'bumf.core',
 ]
 
-INSTALLED_APPS = BASE_APPS + LOCAL_APPS
+INSTALLED_APPS = BASE_APPS + EXTERNAL_APPS + LOCAL_APPS
+
+try:
+    import django_extensions
+    INSTALLED_APPS.append('django_extensions')
+except ImportError:
+    pass
 
 
 MIDDLEWARE = [
