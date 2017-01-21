@@ -2,9 +2,20 @@ from django.conf.urls import include, url
 from rest_framework import routers
 from rest_framework.authtoken import views
 
+from bumf.api.views import (
+    DossierView, ProjectView, RealAccountView, RealTransactionView,
+    VirtualAccountView, VirtualTransactionView,
+)
+
 from .signals import *  # noqa
 
 router = routers.DefaultRouter()
+router.register('dossier', DossierView)
+router.register('project', ProjectView)
+router.register('real-account', RealAccountView)
+router.register('real-transaction', RealTransactionView)
+router.register('virtual-account', VirtualAccountView)
+router.register('virtual-transaction', VirtualTransactionView)
 
 
 urlpatterns = [
