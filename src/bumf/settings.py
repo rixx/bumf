@@ -52,7 +52,6 @@ try:
 except ImportError:
     pass
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -126,3 +125,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+
+#### Debug config
+
+if DEBUG is True:
+    INSTALLED_APPS.append('corsheaders')
+    MIDDLEWARE.append('corsheaders.middleware.CorsMiddleware')
+    CORS_ORIGIN_ALLOW_ALL = True

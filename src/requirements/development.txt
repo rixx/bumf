@@ -1,3 +1,4 @@
+django-cors-headers
 isort
 pylama
 pytest==3.0.*
