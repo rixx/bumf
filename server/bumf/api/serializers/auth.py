@@ -6,6 +6,7 @@ from bumf.core.models import User
 
 class UserSerializer(serializers.ModelSerializer):
 
+    username = serializers.CharField(source='nick')
     password = serializers.CharField(write_only=True)
 
     def create(self, validated_data):
@@ -24,4 +25,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'id', 'nick', 'password']
+        fields = ['email', 'first_name', 'id', 'password', 'username']
