@@ -9,3 +9,10 @@ class BumfViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.AllowAny if settings.DEBUG else permissions.IsAuthenticated
     ]
+
+    def get_queryset(self):
+        if self.request.user.is_anonymous:
+            return self.queryset.none()
+
+        f = {self.user_relation: self.request.user}
+        return self.queryset.filter(**f)

@@ -4,5 +4,6 @@ from bumf.core.models import Project
 
 
 class ProjectView(BumfViewSet):
-    serializer_class = ProjectSerializer
     queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    user_relation = 'user'

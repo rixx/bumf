@@ -4,10 +4,12 @@ from bumf.core.models import RealAccount, VirtualAccount
 
 
 class VirtualAccountView(BumfViewSet):
-    serializer_class = VirtualAccountSerializer
     queryset = VirtualAccount.objects.all()
+    serializer_class = VirtualAccountSerializer
+    user_relation = 'project__user'
 
 
 class RealAccountView(BumfViewSet):
-    serializer_class = RealAccountSerializer
     queryset = RealAccount.objects.all()
+    serializer_class = RealAccountSerializer
+    user_relation = 'project__user'

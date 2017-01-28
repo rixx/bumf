@@ -6,15 +6,18 @@ from bumf.core.models import Dossier, RealTransaction, VirtualTransaction
 
 
 class DossierView(BumfViewSet):
-    serializer_class = DossierSerializer
     queryset = Dossier.objects.all()
+    serializer_class = DossierSerializer
+    user_relation = 'project__user'
 
 
 class VirtualTransactionView(BumfViewSet):
-    serializer_class = VirtualTransactionSerializer
     queryset = VirtualTransaction.objects.all()
+    serializer_class = VirtualTransactionSerializer
+    user_relation = 'dossier__project__user'
 
 
 class RealTransactionView(BumfViewSet):
-    serializer_class = RealTransactionSerializer
     queryset = RealTransaction.objects.all()
+    serializer_class = RealTransactionSerializer
+    user_relation = 'dossier__project__user'
