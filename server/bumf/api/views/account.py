@@ -1,14 +1,13 @@
-from rest_framework import viewsets
-
 from bumf.api.serializers import RealAccountSerializer, VirtualAccountSerializer
+from bumf.api.views.base import BumfViewSet
 from bumf.core.models import RealAccount, VirtualAccount
 
 
-class VirtualAccountView(viewsets.ModelViewSet):
+class VirtualAccountView(BumfViewSet):
     serializer_class = VirtualAccountSerializer
     queryset = VirtualAccount.objects.all()
 
 
-class RealAccountView(viewsets.ModelViewSet):
+class RealAccountView(BumfViewSet):
     serializer_class = RealAccountSerializer
     queryset = RealAccount.objects.all()

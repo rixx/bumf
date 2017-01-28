@@ -1,9 +1,8 @@
-from rest_framework import viewsets
-
 from bumf.api.serializers import ProjectSerializer
+from bumf.api.views.base import BumfViewSet
 from bumf.core.models import Project
 
 
-class ProjectView(viewsets.ModelViewSet):
+class ProjectView(BumfViewSet):
     serializer_class = ProjectSerializer
     queryset = Project.objects.all()
