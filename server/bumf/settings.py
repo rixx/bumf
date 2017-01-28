@@ -37,7 +37,6 @@ BASE_APPS = [
 EXTERNAL_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_swagger',
 ]
 
 LOCAL_APPS = [
@@ -127,6 +126,9 @@ REST_FRAMEWORK = {
     )
 }
 
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
+
 
 #### Debug config
 
@@ -134,3 +136,15 @@ if DEBUG is True:
     INSTALLED_APPS.append('corsheaders')
     MIDDLEWARE.append('corsheaders.middleware.CorsMiddleware')
     CORS_ORIGIN_ALLOW_ALL = True
+
+    INSTALLED_APPS.append('rest_framework_swagger')
+
+    SWAGGER_SETTINGS = {
+        'SECURITY_DEFINITIONS': {
+            'api_key': {
+                'type': 'apiKey',
+                'in': 'header',
+                'name': 'Authorization'
+            }
+        },
+    }
