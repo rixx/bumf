@@ -11,6 +11,11 @@ class Dossier(models.Model):
         verbose_name='Name',
         help_text='A dossier may be named to remember, search and find its contents',
     )
+    project = models.ForeignKey(
+        to='Project',
+        on_delete=models.PROTECT,
+        related_name='+',
+    )
 
 
 class VirtualTransaction(models.Model):
