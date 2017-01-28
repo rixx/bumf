@@ -1,4 +1,3 @@
-from decimal import Decimal
 from functools import partial
 
 from django.core.exceptions import ValidationError

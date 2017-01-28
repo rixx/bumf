@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from bumf.core.models import Project, RealAccount, VirtualAccount
+from bumf.core.models import RealAccount, VirtualAccount
 
 
 class VirtualAccountSerializer(serializers.ModelSerializer):
