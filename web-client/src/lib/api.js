@@ -14,6 +14,17 @@ const api = {
       auth.authenticate(response.token)
       return Promise.resolve()
     })
+  },
+
+  register (username, password, firstname, email) {
+    return window.fetch('http://127.0.0.1:8000/v1/register/', {
+      method: 'POST',
+      body: JSON.stringify({username, password, first_name: firstname, email}),
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then((response) => {
+	  return this.login(username, password)
+    })
   }
 }
 
