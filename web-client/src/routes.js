@@ -1,5 +1,5 @@
 import App from './app'
-import Login from './login'
+import Login from './views/login'
 
 const routes = [{
     path: '/',
