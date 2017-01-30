@@ -1,7 +1,11 @@
 <template>
-  <bunt-button id="the-button" @click.native="login">
-    Knopf.
-  </bunt-button>
+  <form id="bumf-login">
+    <bunt-input name="username" label="username" v-model="username" />
+    <bunt-input name="password" label="password" type="password" v-model="password" />
+    <bunt-button id="button-login" @click.native="login">
+      Log in
+    </bunt-button>
+  </form>
 </template>
 
 <script>
@@ -10,12 +14,13 @@ import api from 'lib/api'
 export default {
   data () {
     return {
-      name: 'Blablubb'
+      username: '',
+      password: ''
     }
   },
   methods: {
     login () {
-      api.login('admin', 'admin') 
+      api.login(this.username, this.password)
     },
   },
 }
@@ -24,6 +29,6 @@ export default {
 <style lang="stylus">
 @import '~_settings'
 
-#the-button
+#button-login
   button-style(color: $clr-danger)
 </style>
