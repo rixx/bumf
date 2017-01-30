@@ -62,6 +62,25 @@ export default {
 <style lang="stylus">
 @import '~_settings'
 
-#button-login
-  button-style(color: $clr-danger)
+#bumf
+  background-color: $clr-grey-100
+  min-height: 100vh
+
+#form-container
+  display: flex
+  align-items: flex-start
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: space-around
+
+.bumf-userform
+  width: 40rem
+  padding: 16px
+  card()
+
+.bumf-userbutton
+  button-style(color: $clr-success)
+
+#exposition
+  padding: 8px
 </style>
