@@ -48,6 +48,7 @@ class VirtualTransaction(models.Model):
         verbose_name='Bank transaction',
         help_text='The real-world bank transaction that describes this transaction.',
     )
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
     comment = models.CharField(max_length=1000, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -75,4 +76,5 @@ class RealTransaction(models.Model):
         related_name='incoming_transactions',
         verbose_name='Account the money moves to',
     )
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
     timestamp = models.DateTimeField()
