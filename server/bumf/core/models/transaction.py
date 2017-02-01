@@ -77,4 +77,4 @@ class RealTransaction(models.Model):
         verbose_name='Account the money moves to',
     )
     amount = models.DecimalField(max_digits=8, decimal_places=2)
-    timestamp = models.DateTimeField()
+    timestamp = models.DateTimeField(auto_now=True)
