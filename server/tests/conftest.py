@@ -7,7 +7,7 @@ def user():
     User = get_user_model()
     user = User.objects.create(
         nick='test_Nick',
-        name='Nico',
+        first_name='Nico',
     )
     user.set_password('testpassword')
     return user
@@ -18,7 +18,7 @@ def superuser():
     User = get_user_model()
     user = User.objects.create(
         nick='test_supernick',
-        name='SuperNico',
+        first_name='SuperNico',
         is_superuser=True,
         is_staff=True,
     )
