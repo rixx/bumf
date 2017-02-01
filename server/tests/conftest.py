@@ -24,3 +24,9 @@ def superuser():
     )
     user.set_password('testpassword')
     return user
+
+
+@pytest.fixture
+def logged_in_client(client, user):
+    client.force_login(user)
+    return client
