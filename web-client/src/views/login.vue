@@ -51,7 +51,7 @@ export default {
       })
     },
     performRegister () {
-        api.register(this.register.username, this.register.password, this.register.firstname, this.register.email).then(() => {
+      api.register(this.register.username, this.register.password, this.register.firstname, this.register.email).then(() => {
         this.$router.push({ path: '/' })
       })
     },

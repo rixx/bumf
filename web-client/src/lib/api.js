@@ -23,7 +23,7 @@ const api = {
       headers: {'Content-Type': 'application/json'}
     })
     .then((response) => {
-	  return this.login(username, password)
+      return this.login(username, password)
     })
   }
 }

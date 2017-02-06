@@ -3,18 +3,18 @@
 
 <script>
 export default {
- components: {},
- data () {
-  return {
-  }
- },
- computed: {},
- created () {},
- mounted () {
-  this.$nextTick(() => {
-  })
- },
- methods: {}
+  components: {},
+  data () {
+    return {
+    }
+  },
+  computed: {},
+  created () {},
+  mounted () {
+    this.$nextTick(() => {
+    })
+  },
+  methods: {}
 }
 </script>
 
