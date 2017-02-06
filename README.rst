@@ -18,19 +18,19 @@ repository of this project.
 
 **Finished features:**
 
- - Told you: only just started, nothing usable here yet.
+- Told you: only just started, nothing usable here yet.
 
 **Planned features:**
 
- - Build a consistent view on accounts and transactions
- - Build an intuitive web frontend
- - Budget using budget accounts
- - Add goals to your budget accounts to keep you on track
- - Keep invoices/other receipts in the app
- - Do simple bookkeeping for very small businesses in a separate frontend
- - Synchronize accounts via HBCI or file import, if wished
- - Provide an app to add transactions on mobile devices
- - Provide easy instructions for self-hosting
+- Build a consistent view on accounts and transactions
+- Build an intuitive web frontend
+- Budget using budget accounts
+- Add goals to your budget accounts to keep you on track
+- Keep invoices/other receipts in the app
+- Do simple bookkeeping for very small businesses in a separate frontend
+- Synchronize accounts via HBCI or file import, if wished
+- Provide an app to add transactions on mobile devices
+- Provide easy instructions for self-hosting
 
 
 Development and contributions
