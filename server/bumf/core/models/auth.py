@@ -14,13 +14,12 @@ def nick_validator(value: str) -> None:
     if not isinstance(value, str):
         raise ValidationError(f'{value} must be a string, but it isn\'t!')
 
-    value = value.strip()
+    if not 2 <= len(value) <= 60:
+        raise ValidationError('The nick must be between 2 and 60 characters long.')
+
     allowed = string.ascii_uppercase + string.ascii_lowercase + string.digits + '-_'
     if not re.compile(rf'^[{allowed}]+$').search(value):
         raise ValidationError('The nick may only contain ascii letters, digits and -_.')
-
-    if not 2 <= len(value) <= 60:
-        raise ValidationError('The nick must be between 2 and 60 characters long.')
 
     if User.objects.filter(nick=value.lower()).exists():
         raise ValidationError('The nick is already in use.')
