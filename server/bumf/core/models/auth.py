@@ -11,9 +11,6 @@ def nick_validator(value: str) -> None:
     Validate nicknames for length, collisions when lower-cased, and allowed
     characters (ascii letters, digits, -, _).
     """
-    if not isinstance(value, str):
-        raise ValidationError(f'{value} must be a string, but it isn\'t!')
-
     if not 2 <= len(value) <= 60:
         raise ValidationError('The nick must be between 2 and 60 characters long.')
 
