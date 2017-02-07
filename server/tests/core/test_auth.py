@@ -89,3 +89,61 @@ def test_name_without_first_name():
     )
     assert u.get_full_name() == 'nick'
     assert u.get_short_name() == 'nick'
+
+
+@pytest.mark.parametrize('nick', ('nick', 'Nicholas', 'N1ch0las', '-_'))
+@pytest.mark.django_db
+def test_nick_validation_valid(nick):
+    u = User(
+        nick=nick,
+        password='some_password',
+    )
+    u.full_clean()
+
+
+@pytest.mark.parametrize('nick', ('n', '-', '1'))
+def test_nick_validation_short(nick):
+    with pytest.raises(ValidationError) as excinfo:
+        u = User(
+            nick=nick,
+            password='some_password',
+        )
+        u.full_clean()
+    assert 'between 2 and 60' in str(excinfo)
+
+
+@pytest.mark.parametrize('nick', ('n'*65, '-'*61, '1'*1000))
+def test_nick_validation_long(nick):
+    with pytest.raises(ValidationError) as excinfo:
+        u = User(
+            nick=nick,
+            password='some_password',
+        )
+        u.full_clean()
+    assert 'between 2 and 60' in str(excinfo)
+
+
+@pytest.mark.parametrize('nick', ("'; DROP TABLE users;", '{name}', '1$()'))
+def test_nick_validation_alphabet(nick):
+    with pytest.raises(ValidationError) as excinfo:
+        u = User(
+            nick=nick,
+            password='some_password',
+        )
+        u.full_clean()
+    assert 'ascii letters' in str(excinfo)
+
+
+@pytest.mark.django_db
+def test_nick_validation_in_use():
+    with pytest.raises(ValidationError) as excinfo:
+        User.objects.create_user(
+            nick='n1cholas',
+            password='some_password',
+        )
+        u = User(
+            nick='n1cholaS',
+            password='some_password'
+        )
+        u.full_clean()
+    assert 'in use' in str(excinfo)
