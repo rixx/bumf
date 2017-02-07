@@ -10,13 +10,13 @@ from bumf.api.views import (
 from .signals import *  # noqa
 
 router = routers.DefaultRouter()
-router.register('dossier', DossierView)
-router.register('project', ProjectView)
-router.register('real-account', RealAccountView)
-router.register('real-transaction', RealTransactionView)
+router.register('dossiers', DossierView)
+router.register('projects', ProjectView)
+router.register('real-accounts', RealAccountView)
+router.register('real-transactions', RealTransactionView)
 router.register('register', UserView)
-router.register('virtual-account', VirtualAccountView)
-router.register('virtual-transaction', VirtualTransactionView)
+router.register('virtual-accounts', VirtualAccountView)
+router.register('virtual-transactions', VirtualTransactionView)
 
 
 urlpatterns = [
