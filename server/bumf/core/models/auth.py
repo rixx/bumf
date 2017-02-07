@@ -14,7 +14,7 @@ def nick_validator(value: str) -> None:
     if not 2 <= len(value) <= 60:
         raise ValidationError('The nick must be between 2 and 60 characters long.')
 
-    allowed = string.ascii_uppercase + string.ascii_lowercase + string.digits + '-_'
+    allowed = string.ascii_uppercase + string.ascii_lowercase + string.digits + '\-_'
     if not re.compile(rf'^[{allowed}]+$').search(value):
         raise ValidationError('The nick may only contain ascii letters, digits and -_.')
 
