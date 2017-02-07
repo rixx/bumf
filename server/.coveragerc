@@ -1,3 +1,8 @@
 [run]
 branch = True
-omit = */migrations/*
+omit = */admin.py
+       */migrations/*
+       */settings*
+       */urls.py
+       */tests/*
+       */wsgi.py
