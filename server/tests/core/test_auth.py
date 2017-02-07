@@ -1,10 +1,12 @@
 import pytest
+from django.contrib.auth import authenticate, get_user_model
+from django.core.exceptions import ValidationError
+
+User = get_user_model()
 
 
 @pytest.mark.django_db
 def test_user_creation():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User.objects.create_user(
         nick='some_nick',
         password='some_password'
@@ -24,8 +26,6 @@ def test_user_creation():
 
 @pytest.mark.django_db
 def test_user_creation_additional_data():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User.objects.create_user(
         nick='some_nick',
         password='some_password',
@@ -44,8 +44,6 @@ def test_user_creation_additional_data():
 
 @pytest.mark.django_db
 def test_superuser_creation():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User.objects.create_superuser(
         nick='some_other_nick',
         password='some_password'
@@ -60,8 +58,6 @@ def test_superuser_creation():
 
 
 def test_user_string_without_mail():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User(
         nick='nick',
     )
@@ -69,8 +65,6 @@ def test_user_string_without_mail():
 
 
 def test_user_string_with_mail():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User(
         nick='nick',
         email='some@another.tld',
@@ -79,8 +73,6 @@ def test_user_string_with_mail():
 
 
 def test_name_with_first_name():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User(
         nick='nick',
         first_name='Nick!',
@@ -91,8 +83,6 @@ def test_name_with_first_name():
 
 
 def test_name_without_first_name():
-    from django.contrib.auth import authenticate, get_user_model
-    User = get_user_model()
     u = User(
         nick='nick',
         email='some@another.tld',
