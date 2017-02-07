@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3.6"
+install: true
+sudo: required
+script: ./.travis.sh
+env:
+  - TRAVIS_COMPONENT=server
+  - TRAVIS_COMPONENT=web
