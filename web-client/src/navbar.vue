@@ -32,8 +32,29 @@ export default {
 
 #navbar
   background-color: $clr-primary
-  display: flex
-  flex-direction: column
   width: 240px
   padding: 16px
+  display: flex
+  flex-direction: column
+
+#nav-account-links
+  display: flex
+  flex-direction: column
+  padding-top: 240px
+
+  :hover
+    background-color: $clr-primary-dark
+
+#nav-account-links a
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  padding: 8px
+  color: $clr-black
+  text-decoration: none
+
+.nav-account-amount-negative
+  background-color: $clr-white
+  color: $clr-danger
+
 </style>
