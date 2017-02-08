@@ -101,3 +101,13 @@ class RealAccount(models.Model):
         choices=RealAccountVariantChoices.get_choices(),
     )
     import_transactions = models.BooleanField(default=False)
+
+    @property
+    def total(self):
+        incoming = self.incoming_transactions\
+            .aggregate(total=models.Sum('amount'))\
+            .get('total') or 0
+        outgoing = self.outgoing_transactions.\
+            aggregate(total=models.Sum('amount'))\
+            .get('total') or 0
+        return incoming - outgoing

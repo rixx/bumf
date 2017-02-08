@@ -14,4 +14,9 @@ class RealAccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RealAccount
-        fields = '__all__'
+        fields = (
+            # Model fields
+            'id', 'import_transactions', 'name', 'project', 'variant',
+            # Properties
+            'total',
+        )
