@@ -25,7 +25,48 @@ const api = {
     .then((response) => {
       return this.login(username, password)
     })
-  }
+  },
+
+  realAccounts: {
+    list () {
+      return window.fetch('http://127.0.0.1:8000/v1/real-accounts/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + auth.authToken,
+        }
+      })
+      .then((response) => {
+        return response.json()
+      })
+    },
+    get (id) {
+      return window.fetch(`http://127.0.0.1:8000/v1/real-accounts/${id}/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + auth.authToken,
+        }
+      })
+      .then((response) => {
+        return response.json()
+      })
+    },
+  },
+  realTransactions: {
+    list (accountId) {
+      return window.fetch('http://127.0.0.1:8000/v1/real-transactions/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Token ' + auth.authToken,
+        }
+      })
+      .then((response) => {
+        return response.json()
+      })
+    },
+  },
 }
 
 export default api
