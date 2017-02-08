@@ -1,7 +1,13 @@
 <template>
   <div id="navbar">
-    <router-link :to="{ name: 'budget'}">Budget</router-link>
-    <router-link v-for="account in accounts" :to="{ name: 'account', params: {id: account.id}}">{{ account.name }}</router-link>
+    <div id="nav-account-links">
+      <router-link :to="{ name: 'budget'}">Budget</router-link>
+      <router-link v-for="account in accounts" :to="{ name: 'account', params: {id: account.id}}">
+        <div class="nav-account-name">{{ account.name }}</div>
+        <div class="nav-account-amount nav-account-amount-negative" v-if="account.total < 0">{{ account.total }} €</div>
+        <div class="nav-account-amount" v-else>{{ account.total }} €</div>
+      </router-link>
+    </div>
   </div>
 </template>
 
