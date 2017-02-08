@@ -45,16 +45,22 @@ export default {
   :hover
     background-color: $clr-primary-dark
 
+#nav-account-links .router-link-active
+  background-color: $clr-primary-active
+
+  :hover
+    background-color: $clr-primary-active
+
 #nav-account-links a
   display: flex
   flex-direction: row
   justify-content: space-between
-  padding: 8px
   color: $clr-black
+  padding: 8px
   text-decoration: none
 
 .nav-account-amount-negative
-  background-color: $clr-white
-  color: $clr-danger
+  color: $clr-warning
+  font-weight: bold
 
 </style>
