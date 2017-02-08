@@ -28,6 +28,6 @@ export default {
   background-color: $clr-primary
   display: flex
   flex-direction: column
-  width: 360px
+  width: 240px
   padding: 16px
 </style>
