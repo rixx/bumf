@@ -6,6 +6,7 @@ import auth from 'lib/auth'
 import Main from './main.vue'
 import routes from './routes'
 
+import 'components/filters'
 import './styles/style.styl'
 
 Vue.use(Buntpapier)

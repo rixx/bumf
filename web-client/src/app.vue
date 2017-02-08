@@ -24,4 +24,8 @@ export default {
 </script>
 
 <style lang="stylus">
+#app
+  display: flex
+  height: 100vh
+  overflow: hidden
 </style>
