@@ -18,7 +18,13 @@ class VirtualTransactionSerializer(serializers.ModelSerializer):
 
 
 class RealTransactionSerializer(serializers.ModelSerializer):
+    transactions = VirtualTransactionSerializer(many=True)
 
     class Meta:
         model = RealTransaction
-        fields = '__all__'
+        fields = (
+            # Model fields
+            'dossier', 'source', 'destination', 'amount', 'timestamp',
+            # Related fields
+            'transactions',
+        )
