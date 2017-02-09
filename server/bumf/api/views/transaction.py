@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from bumf.api.serializers import (
     DossierSerializer, RealTransactionSerializer, VirtualTransactionSerializer,
 )
@@ -21,3 +23,10 @@ class RealTransactionView(BumfViewSet):
     queryset = RealTransaction.objects.all()
     serializer_class = RealTransactionSerializer
     user_relation = 'dossier__project__user'
+
+    def get_queryset(self):
+        queryset = self.queryset
+        account_id = self.request.query_params.get('account_id', None)
+        if account_id is not None:
+            queryset = queryset.filter(Q(source__id=account_id) | Q(destination__id=account_id))
+        return queryset

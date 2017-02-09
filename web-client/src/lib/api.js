@@ -55,7 +55,11 @@ const api = {
   },
   realTransactions: {
     list (accountId) {
-      return window.fetch('http://127.0.0.1:8000/v1/real-transactions/', {
+      let url = 'http://127.0.0.1:8000/v1/real-transactions/'
+      if (accountId) {
+        url += `?account_id=${accountId}`
+      }
+      return window.fetch(url, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
