@@ -36,6 +36,7 @@ export default {
   padding: 16px
   display: flex
   flex-direction: column
+  flex-shrink: 0
 
 #nav-account-links
   display: flex
