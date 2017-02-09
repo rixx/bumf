@@ -7,12 +7,12 @@
     </div>
     <table id="transaction-table">
       <thead>
-        <th class="transaction-date">Date</th>
-        <th class="transaction-payee">Payee</th>
-        <th class="transaction-category">Category</th>
-        <th class="transaction-comment">Comment</th>
-        <th class="transaction-in">Inflow</th>
-        <th class="transaction-out">Outflow</th>
+        <th>Date</th>
+        <th>Payee</th>
+        <th>Category</th>
+        <th>Comment</th>
+        <th>Inflow</th>
+        <th>Outflow</th>
       </thead>
       <tbody>
         <tr v-for="transaction in transactions">
@@ -20,9 +20,9 @@
           <td class="transaction-payee"></td>
           <td class="transaction-category"></td>
           <td class="transaction-comment"></td>
-          <td class="transaction-in" v-if="transaction.destination == account.id">{{ transaction.amount }}</td>
+          <td class="transaction-in" v-if="transaction.destination == account.id">{{ transaction.amount }} €</td>
           <td class="transaction-in" v-else></td>
-          <td class="transaction-out" v-if="transaction.source == account.id">{{ transaction.amount }}</td>
+          <td class="transaction-out" v-if="transaction.source == account.id">{{ transaction.amount }} €</td>
           <td class="transaction-out" v-else></td>
         </tr>
       </tbody>
@@ -93,34 +93,31 @@ export default {
   color: $clr-danger
 
 #transaction-table
-  display: table
-  width: 100%
+  margin: 0
+  table()
 
   tbody
     :hover
       background-color: $clr-grey-200
 
-  tbody td, thead th
-    border-collapse: collapse
-    border-spacing: 0
-    border-style: solid
-    padding: 4px
-    text-align: left
+  thead th, tbody td
+    height: 0
 
   thead th
     background-color: $clr-cyan-100
-    border-width: 0
     font-weight: normal
+    padding: 16px
 
   tbody td
     border-color: $clr-grey-300
-    border-width: 0px 0px 1px 0px
+    border-bottom: border-separator()
+    padding: 8px
 
   .transaction-date
     width: 80px
 
   .transaction-in, .transaction-out
-    width: 80px
     text-align: right
+    width: 80px
 
 </style>
