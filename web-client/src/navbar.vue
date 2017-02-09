@@ -60,8 +60,13 @@ export default {
   padding: 8px
   text-decoration: none
 
-.nav-account-amount-negative
-  color: $clr-warning
+.nav-account-amount
   font-weight: bold
+  padding: 1px 1px 2px 1px
+
+.nav-account-amount-negative
+  background-color: $clr-white
+  border-radius: 4px
+  color: $clr-danger
 
 </style>

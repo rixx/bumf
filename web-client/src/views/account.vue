@@ -1,6 +1,10 @@
 <template>
   <div class="account" v-if="account">
-    {{ account.name }}
+    <div id="account-header">
+      <span id="account-header-name">{{ account.name }}:</span>
+      <span id="account-header-total" class="account-header-negative" v-if="account.total < 0">{{ account.total }} €</span>
+      <span id="account-header-total" v-else>{{ account.total }} €</span>
+    </div>
     <table id="transaction-table">
       <thead>
         <th class="transaction-date">Date</th>
@@ -23,7 +27,7 @@
         </tr>
       </tbody>
     </table>
-  </div>    
+  </div>
 </template>
 
 <script>
@@ -65,30 +69,58 @@ export default {
 
 <style lang="stylus">
 
+.account
+  width: 100%
+
+#account-header
+  width: 100%
+  background-color: $clr-cyan-700
+  padding: 8px
+
+  #account-header-name
+    color: $clr-white
+    font-size: 18pt
+
+  #account-header-total
+    background-color: $clr-white
+    border-radius: 8px
+    font-size: 16pt
+    font-weight: bold
+    margin-left: 8px
+    padding: 4px
+
+#account-header-total.account-header-negative
+  color: $clr-danger
+
 #transaction-table
   display: table
+  width: 100%
+
+  tbody
+    :hover
+      background-color: $clr-grey-200
 
   tbody td, thead th
-    text-align: left
     border-collapse: collapse
+    border-spacing: 0
     border-style: solid
+    padding: 4px
+    text-align: left
 
   thead th
-    border-color: $clr-primary
-    border-width: 2px 0px 2px 0px
+    background-color: $clr-cyan-100
+    border-width: 0
+    font-weight: normal
 
   tbody td
-    border-width: 0px 0px 2px 0px
-    border-color: $clr-inactive
+    border-color: $clr-grey-300
+    border-width: 0px 0px 1px 0px
 
   .transaction-date
-    width: 20%
-  .transaction-payee, .transaction-category
-    width: 10%
+    width: 80px
+
   .transaction-in, .transaction-out
+    width: 80px
     text-align: right
-    width: 10%
-  .transaction-comment
-    width: 20%
 
 </style>
