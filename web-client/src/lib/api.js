@@ -11,9 +11,13 @@ const api = {
       return response.json()
     })
     .then((response) => {
-      auth.authenticate(response.token)
+      auth.authenticate(response.token, username)
       return Promise.resolve()
     })
+  },
+
+  logout () {
+    auth.logout()
   },
 
   register (username, password, firstname, email) {

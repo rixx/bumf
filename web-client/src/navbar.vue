@@ -8,21 +8,33 @@
         <div class="nav-account-amount" v-else>{{ account.total }} €</div>
       </router-link>
     </div>
+    <div id="nav-user-links">
+      <div id="nav-username">{{ username }}</div>
+      <bunt-button @click.native="performLogout">logout</bunt-button>
   </div>
 </template>
 
 <script>
 import api from 'lib/api'
+import auth from 'lib/auth'
+
 export default {
   data () {
     return {
       accounts: [],
+      username: auth.authUser,
     }
   },
   mounted () {
     api.realAccounts.list().then((list) => {
       this.accounts = list
     })
+  },
+  methods: {
+    performLogout () {
+      api.logout()
+      this.$router.push({ path: '/login' })
+    }
   }
 }
 </script>
@@ -32,11 +44,12 @@ export default {
 
 #navbar
   background-color: $clr-primary
-  width: 240px
-  padding: 16px
   display: flex
   flex-direction: column
   flex-shrink: 0
+  justify-content: space-between
+  padding: 16px
+  width: 240px
 
 #nav-account-links
   display: flex
@@ -45,6 +58,16 @@ export default {
 
   :hover
     background-color: $clr-primary-dark
+
+#nav-user-links
+  align-items: baseline
+  display: flex
+  flix-direction: row
+  justify-content: space-between
+
+  #nav-username
+    background-color: $clr-primary-dark
+    padding: 8px 16px
 
 #nav-account-links .router-link-active
   background-color: $clr-primary-active
