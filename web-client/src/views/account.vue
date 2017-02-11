@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <template v-for="trans in transactions">
-          <tr v-for="split in trans.transactions">
+          <tr v-for="split in trans.transactions" @click="activeTransaction=(split == activeTransaction) ? null : split" :class="{active: split==activeTransaction}">
               <td class="transaction-date">{{ trans.timestamp | date }}</td>
               <td class="transaction-payee">{{ split.destination.name }}</td>
               <td class="transaction-category">{{ split.source.name }}</td>
@@ -41,6 +41,7 @@ export default {
   data () {
     return {
       account: null,
+      activeTransaction: null,
       transactions: [],
     }
   },
@@ -101,6 +102,8 @@ export default {
   tbody
     :hover
       background-color: $clr-grey-200
+    .active, .active :hover
+      background-color: $clr-cyan-500
 
   thead th, tbody td
     height: 0
