@@ -1,4 +1,4 @@
-from .account import RealAccount, RealAccountVariantChoices, VirtualAccount, VirtualAccountVariantChoices
+from .account import RealAccount, RealAccountVariants, VirtualAccount, VirtualAccountVariants
 from .auth import User
 from .project import Project, ProjectScopeChoices
 from .transaction import Dossier, RealTransaction, VirtualTransaction

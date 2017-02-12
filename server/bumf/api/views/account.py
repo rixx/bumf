@@ -1,11 +1,11 @@
-from bumf.api.serializers import RealAccountSerializer, VirtualAccountSerializer
+from bumf.api.serializers import BudgetAccountSerializer, RealAccountSerializer
 from bumf.api.views.base import BumfViewSet
-from bumf.core.models import RealAccount, VirtualAccount
+from bumf.core.models import RealAccount, VirtualAccount, VirtualAccountVariants
 
 
-class VirtualAccountView(BumfViewSet):
-    queryset = VirtualAccount.objects.all()
-    serializer_class = VirtualAccountSerializer
+class BudgetAccountView(BumfViewSet):
+    queryset = VirtualAccount.objects.filter(variant=VirtualAccountVariants.BUDGET)
+    serializer_class = BudgetAccountSerializer
     user_relation = 'project__user'
 
 

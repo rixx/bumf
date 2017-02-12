@@ -3,8 +3,8 @@ from django.contrib.auth import get_user_model
 
 from bumf.core.models import (
     Dossier, Project, ProjectScopeChoices, RealAccount,
-    RealAccountVariantChoices, RealTransaction, VirtualAccount,
-    VirtualAccountVariantChoices, VirtualTransaction,
+    RealAccountVariants, RealTransaction, VirtualAccount,
+    VirtualAccountVariants, VirtualTransaction,
 )
 
 
