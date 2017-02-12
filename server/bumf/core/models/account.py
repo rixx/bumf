@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 from bumf.core.models.utils import Choices
+from bumf.core.utils.mixins import CalculateTotal
 
 
 class VirtualAccountVariants(Choices):
@@ -44,7 +45,7 @@ validate_income_account = partial(validate_variant, VirtualAccountVariants.INCOM
 validate_expense_account = partial(validate_variant, VirtualAccountVariants.EXPENSE)
 
 
-class VirtualAccount(models.Model):
+class VirtualAccount(CalculateTotal, models.Model):
     """
     Virtual Accounts are used to budget money for its intended use. They are
     the heart of bumf and are roughly equivalent to YNAB's categories.
@@ -82,7 +83,7 @@ class RealAccountVariants(Choices):
     ]
 
 
-class RealAccount(models.Model):
+class RealAccount(CalculateTotal, models.Model):
     """
     Real accounts mirror actual bank accounts (or wallets, or other assets).
     """
@@ -101,13 +102,3 @@ class RealAccount(models.Model):
         choices=RealAccountVariants.get_choices(),
     )
     import_transactions = models.BooleanField(default=False)
-
-    @property
-    def total(self):
-        incoming = self.incoming_transactions\
-            .aggregate(total=models.Sum('amount'))\
-            .get('total') or 0
-        outgoing = self.outgoing_transactions.\
-            aggregate(total=models.Sum('amount'))\
-            .get('total') or 0
-        return incoming - outgoing
