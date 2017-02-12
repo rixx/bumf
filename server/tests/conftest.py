@@ -1,10 +1,10 @@
 import pytest
 from django.contrib.auth import get_user_model
+from rest_framework.test import APIClient
 
 from bumf.core.models import (
-    Dossier, Project, ProjectScopeChoices, RealAccount,
-    RealAccountVariants, RealTransaction, VirtualAccount,
-    VirtualAccountVariants, VirtualTransaction,
+    Dossier, Project, ProjectScopeChoices, RealAccount, RealAccountVariants,
+    RealTransaction, VirtualAccount, VirtualAccountVariants, VirtualTransaction,
 )
 
 
@@ -33,8 +33,9 @@ def superuser():
 
 
 @pytest.fixture
-def logged_in_client(client, user):
-    client.force_login(user)
+def logged_in_client(user):
+    client = APIClient()
+    client.force_authenticate(user=user)
     return client
 
 
