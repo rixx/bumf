@@ -11,8 +11,8 @@ const api = {
 
     let options = {
       method: verb || 'GET',
-      fullHeaders,
-      body: JSON.stringify(body)
+      headers: fullHeaders,
+      body: body && JSON.stringify(body)
     }
     return window.fetch(url, options).then((response) => {
       if (response.status === 204) {
