@@ -68,7 +68,7 @@ def dossier(project):
 def virtual_budget_account(project):
     return VirtualAccount.objects.create(
         name='Some Budget Account',
-        variant=VirtualAccountVariantChoices.BUDGET,
+        variant=VirtualAccountVariants.BUDGET,
         project=project
     )
 
@@ -77,7 +77,7 @@ def virtual_budget_account(project):
 def virtual_liability_account(project):
     return VirtualAccount.objects.create(
         name='Some Liability Account',
-        variant=VirtualAccountVariantChoices.LIABILITY,
+        variant=VirtualAccountVariants.LIABILITY,
         project=project
     )
 
@@ -86,7 +86,7 @@ def virtual_liability_account(project):
 def virtual_income_account(project):
     return VirtualAccount.objects.create(
         name='Some Income Account',
-        variant=VirtualAccountVariantChoices.INCOME,
+        variant=VirtualAccountVariants.INCOME,
         project=project
     )
 
@@ -95,7 +95,7 @@ def virtual_income_account(project):
 def virtual_expense_account(project):
     return VirtualAccount.objects.create(
         name='Some Expense Account',
-        variant=VirtualAccountVariantChoices.EXPENSE,
+        variant=VirtualAccountVariants.EXPENSE,
         project=project
     )
 
@@ -105,7 +105,7 @@ def bank_account(project):
     return RealAccount.objects.create(
         name='Some Bank Account',
         project=project,
-        variant=RealAccountVariantChoices.BANK_ACCOUNT,
+        variant=RealAccountVariants.BANK_ACCOUNT,
     )
 
 
@@ -114,7 +114,7 @@ def cash_account(project):
     return RealAccount.objects.create(
         name='Some Cash Account',
         project=project,
-        variant=RealAccountVariantChoices.CASH,
+        variant=RealAccountVariants.CASH,
     )
 
 

@@ -10,9 +10,9 @@ __all__ = [
     'ProjectScopeChoices',
     'User',
     'RealAccount',
-    'RealAccountVariantChoices',
+    'RealAccountVariants',
     'RealTransaction',
     'VirtualAccount',
-    'VirtualAccountVariantChoices',
+    'VirtualAccountVariants',
     'VirtualTransaction',
 ]

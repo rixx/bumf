@@ -6,7 +6,7 @@ from django.db import models
 from bumf.core.models.utils import Choices
 
 
-class VirtualAccountVariantChoices(Choices):
+class VirtualAccountVariants(Choices):
     """
     There is one main virtual account type, the budget account, used for budget
     categories. And there are liabilities …
@@ -39,9 +39,9 @@ def validate_variant(variant, value):
         raise ValidationError(f'The object\'s variant is "{value}", but "{variant}" is required!')
 
 
-validate_budget_account = partial(validate_variant, VirtualAccountVariantChoices.BUDGET)
-validate_income_account = partial(validate_variant, VirtualAccountVariantChoices.INCOME)
-validate_expense_account = partial(validate_variant, VirtualAccountVariantChoices.EXPENSE)
+validate_budget_account = partial(validate_variant, VirtualAccountVariants.BUDGET)
+validate_income_account = partial(validate_variant, VirtualAccountVariants.INCOME)
+validate_expense_account = partial(validate_variant, VirtualAccountVariants.EXPENSE)
 
 
 class VirtualAccount(models.Model):
@@ -54,9 +54,9 @@ class VirtualAccount(models.Model):
         verbose_name='Name',
     )
     variant = models.CharField(
-        max_length=VirtualAccountVariantChoices.get_max_length(),
-        default=VirtualAccountVariantChoices.BUDGET,
-        choices=VirtualAccountVariantChoices.get_choices(),
+        max_length=VirtualAccountVariants.get_max_length(),
+        default=VirtualAccountVariants.BUDGET,
+        choices=VirtualAccountVariants.get_choices(),
     )
     project = models.ForeignKey(
         to='Project',
@@ -73,7 +73,7 @@ class VirtualAccount(models.Model):
     )
 
 
-class RealAccountVariantChoices(Choices):
+class RealAccountVariants(Choices):
     BANK_ACCOUNT = 'bank'
     CASH = 'cash'
 
@@ -96,9 +96,9 @@ class RealAccount(models.Model):
         related_name='real_accounts',
     )
     variant = models.CharField(
-        max_length=RealAccountVariantChoices.get_max_length(),
-        default=RealAccountVariantChoices.BANK_ACCOUNT,
-        choices=RealAccountVariantChoices.get_choices(),
+        max_length=RealAccountVariants.get_max_length(),
+        default=RealAccountVariants.BANK_ACCOUNT,
+        choices=RealAccountVariants.get_choices(),
     )
     import_transactions = models.BooleanField(default=False)
 
