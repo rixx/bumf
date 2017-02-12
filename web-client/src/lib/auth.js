@@ -14,8 +14,8 @@ const auth = {
   },
 
   logout () {
-    localStorage.setItem('authToken', null)
-    localStorage.setItem('authUser', null)
+    localStorage.removeItem('authToken')
+    localStorage.removeItem('authUser')
 
     auth.authToken = null
     auth.authUser = null
