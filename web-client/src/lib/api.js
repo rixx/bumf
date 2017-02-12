@@ -2,24 +2,26 @@ import auth from 'lib/auth'
 
 const api = {
   http (verb, url, headers, body) {
-    var headers = JSON.parse(JSON.stringify(headers)) || {}
-    headers['Content-Type'] = headers['Content-Type'] || 'application/json'
+    var fullHeaders = JSON.parse(JSON.stringify(headers)) || {}
+    fullHeaders['Content-Type'] = fullHeaders['Content-Type'] || 'application/json'
 
-    if (!headers['Authorization'] && auth.authToken) {
-      headers['Authorization'] = 'Token ' + auth.authToken
+    if (!fullHeaders['Authorization'] && auth.authToken) {
+      fullHeaders['Authorization'] = 'Token ' + auth.authToken
     }
 
     let options = {
       method: verb || 'GET',
-      headers,
+      fullHeaders,
       body: JSON.stringify(body)
     }
     return window.fetch(url, options).then((response) => {
-      if (response.status === 204)
+      if (response.status === 204) {
         return Promise.resolve()
+      }
       return response.json().then((json) => {
-        if (!response.ok)
+        if (!response.ok) {
           return Promise.reject({response, json})
+        }
         return Promise.resolve(json)
       })
     }).catch((error) => {
