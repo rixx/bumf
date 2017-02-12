@@ -1,16 +1,39 @@
 import auth from 'lib/auth'
 
 const api = {
+  http (verb, url, headers, body) {
+    var headers = JSON.parse(JSON.stringify(headers)) || {}
+    headers['Content-Type'] = headers['Content-Type'] || 'application/json'
+
+    if (!headers['Authorization'] && auth.authToken) {
+      headers['Authorization'] = 'Token ' + auth.authToken
+    }
+
+    let options = {
+      method: verb || 'GET',
+      headers,
+      body: JSON.stringify(body)
+    }
+    return window.fetch(url, options).then((response) => {
+      if (response.status === 204)
+        return Promise.resolve()
+      return response.json().then((json) => {
+        if (!response.ok)
+          return Promise.reject({response, json})
+        return Promise.resolve(json)
+      })
+    }).catch((error) => {
+      return Promise.reject(error)
+    })
+  },
+
   login (username, password) {
-    return window.fetch('http://127.0.0.1:8000/token-auth/', {
-      method: 'POST',
-      body: JSON.stringify({username, password}),
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then((response) => {
-      return response.json()
-    })
-    .then((response) => {
+    api.http(
+      'POST',
+      'http://127.0.0.1:8000/token-auth/',
+      null,
+      {username, password}
+    ).then((response) => {
       auth.authenticate(response.token, username)
       return Promise.resolve()
     })
@@ -21,40 +44,22 @@ const api = {
   },
 
   register (username, password, firstname, email) {
-    return window.fetch('http://127.0.0.1:8000/v1/register/', {
-      method: 'POST',
-      body: JSON.stringify({username, password, first_name: firstname, email}),
-      headers: {'Content-Type': 'application/json'}
-    })
-    .then((response) => {
+    api.http(
+      'POST',
+      'http://127.0.0.1:8000/v1/register',
+      null,
+      {username, password, first_name: firstname, email}
+    ).then((response) => {
       return this.login(username, password)
     })
   },
 
   realAccounts: {
     list () {
-      return window.fetch('http://127.0.0.1:8000/v1/real-accounts/', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token ' + auth.authToken,
-        }
-      })
-      .then((response) => {
-        return response.json()
-      })
+      return api.http('GET', 'http://127.0.0.1:8000/v1/real-accounts/', null, null)
     },
     get (id) {
-      return window.fetch(`http://127.0.0.1:8000/v1/real-accounts/${id}/`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token ' + auth.authToken,
-        }
-      })
-      .then((response) => {
-        return response.json()
-      })
+      return api.http('GET', `http://127.0.0.1:8000/v1/real-accounts/${id}/`, null, null)
     },
   },
   realTransactions: {
@@ -63,16 +68,7 @@ const api = {
       if (accountId) {
         url += `?account_id=${accountId}`
       }
-      return window.fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Token ' + auth.authToken,
-        }
-      })
-      .then((response) => {
-        return response.json()
-      })
+      return api.http('GET', url, null, null)
     },
   },
 }
