@@ -9,8 +9,8 @@
       </router-link>
     </div>
     <div id="nav-user-links">
-      <div id="nav-username">{{ username }}</div>
-      <bunt-button @click.native="performLogout">logout</bunt-button>
+      <bunt-button id="nav-username">{{ username }}</bunt-button>
+      <bunt-button id="nav-logout" @click.native="performLogout">logout</bunt-button>
   </div>
 </template>
 
@@ -67,7 +67,6 @@ export default {
 
   #nav-username
     background-color: $clr-primary-dark
-    padding: 8px 16px
 
 #nav-account-links .router-link-active
   background-color: $clr-primary-active
