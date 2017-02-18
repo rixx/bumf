@@ -15,16 +15,29 @@
         <th>Outflow</th>
       </thead>
       <tbody>
+        <tr class="transaction-input">
+          <td class="transaction-date"><bunt-input class="transaction-input"></bunt-input></td>
+          <td class="transaction-payee"><bunt-input class="transaction-input"></bunt-input></td>
+          <td class="transaction-category"><bunt-input class="transaction-input"></bunt-input></td>
+          <td class="transaction-comment"><bunt-input class="transaction-input"></bunt-input></td>
+          <td class="transaction-in"><bunt-input class="transaction-input"></bunt-input></td>
+          <td class="transaction-out"><bunt-input class="transaction-input"></bunt-input></td>
+        </tr>
+        <tr class="transaction-confirm">
+          <td colspan="6"><bunt-button>Save</bunt-button></td>
+        </tr>
+      </tbody>
+      <tbody class="transaction-list">
         <template v-for="trans in transactions">
           <tr v-for="split in trans.transactions" @click="activeTransaction=(split == activeTransaction) ? null : split" :class="{active: split==activeTransaction}">
-              <td class="transaction-date">{{ trans.timestamp | date }}</td>
-              <td class="transaction-payee">{{ split.destination.name }}</td>
-              <td class="transaction-category">{{ split.source.name }}</td>
-              <td class="transaction-comment">{{ split.comment }}</td>
-              <td class="transaction-in" v-if="trans.destination == account.id">{{ split.amount }} €</td>
-              <td class="transaction-in" v-else></td>
-              <td class="transaction-out" v-if="trans.source == account.id">{{ split.amount }} €</td>
-              <td class="transaction-out" v-else></td>
+            <td class="transaction-date">{{ trans.timestamp | date }}</td>
+            <td class="transaction-payee">{{ split.destination.name }}</td>
+            <td class="transaction-category">{{ split.source.name }}</td>
+            <td class="transaction-comment">{{ split.comment }}</td>
+            <td class="transaction-in" v-if="trans.destination == account.id">{{ split.amount }} €</td>
+            <td class="transaction-in" v-else></td>
+            <td class="transaction-out" v-if="trans.source == account.id">{{ split.amount }} €</td>
+            <td class="transaction-out" v-else></td>
           </tr>
         </template>
       </tbody>
@@ -99,7 +112,7 @@ export default {
   margin: 0
   table()
 
-  tbody
+  tbody.transaction-list
     :hover
       background-color: $clr-grey-200
     .active, .active :hover
@@ -124,5 +137,20 @@ export default {
   .transaction-in, .transaction-out
     text-align: right
     width: 80px
+
+  .transaction-input
+    > td
+      border-bottom-width: 0px
+      vertical-align: top
+
+      > .bunt-input.dense.transaction-input
+        margin-bottom: 0px
+        padding-top: 0px
+
+  .transaction-confirm
+    text-align: right
+
+    > td button
+      background-color: $clr-cyan-100
 
 </style>
