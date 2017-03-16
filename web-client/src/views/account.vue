@@ -14,14 +14,14 @@
         <th>Inflow</th>
         <th>Outflow</th>
       </thead>
-      <tbody>
+      <tbody class="transaction-new">
         <tr class="transaction-input">
-          <td class="transaction-date"><bunt-input class="transaction-input"></bunt-input></td>
-          <td class="transaction-payee"><bunt-input class="transaction-input"></bunt-input></td>
-          <td class="transaction-category"><bunt-input class="transaction-input"></bunt-input></td>
-          <td class="transaction-comment"><bunt-input class="transaction-input"></bunt-input></td>
-          <td class="transaction-in"><bunt-input class="transaction-input"></bunt-input></td>
-          <td class="transaction-out"><bunt-input class="transaction-input"></bunt-input></td>
+          <td class="transaction-date"><bunt-input v-model="newTransaction.date" name="newTransactionDate"></bunt-input></td>
+          <td class="transaction-payee"><bunt-input v-model="newTransaction.payee" name="newTransactionPayee"></bunt-input></td>
+          <td class="transaction-category"><bunt-input v-model="newTransaction.category" name="newTransactionCategory"></bunt-input></td>
+          <td class="transaction-comment"><bunt-input v-model="newTransaction.comment" name="newTransactionComment"></bunt-input></td>
+          <td class="transaction-in"><bunt-input v-model="newTransaction.inflow" name="newTransactionIn"></bunt-input></td>
+          <td class="transaction-out"><bunt-input v-model="newTransaction.outflow" name="newTransactionOut"></bunt-input></td>
         </tr>
         <tr class="transaction-confirm">
           <td colspan="6"><bunt-button>Save</bunt-button></td>
@@ -55,6 +55,14 @@ export default {
     return {
       account: null,
       activeTransaction: null,
+      newTransaction: {
+        date: '',
+        payee: '',
+        category: '',
+        comment: '',
+        inflow: '',
+        outflow: '',
+      },
       transactions: [],
     }
   },
@@ -118,6 +126,9 @@ export default {
     .active, .active :hover
       background-color: $clr-cyan-500
 
+  tbody.transaction-new
+    border-bottom: border-separator()
+
   thead th, tbody td
     height: 0
 
@@ -143,7 +154,7 @@ export default {
       border-bottom-width: 0px
       vertical-align: top
 
-      > .bunt-input.dense.transaction-input
+      > .bunt-input
         margin-bottom: 0px
         padding-top: 0px
 
