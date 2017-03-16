@@ -24,7 +24,7 @@
           <td class="transaction-out"><bunt-input v-model="newTransaction.outflow" name="newTransactionOut"></bunt-input></td>
         </tr>
         <tr class="transaction-confirm">
-          <td colspan="6"><bunt-button>Save</bunt-button></td>
+          <td colspan="6"><bunt-button @click.native="performCreate">Save</bunt-button></td>
         </tr>
       </tbody>
       <tbody class="transaction-list">
@@ -85,6 +85,39 @@ export default {
       })
       api.realTransactions.list(this.$route.params.id).then((transactions) => {
         this.transactions = transactions
+      })
+    },
+    performCreate () {
+      const APITransaction = {
+        'timestamp': this.newTransaction.date,
+        'dossier': {'project': this.account.project},
+      }
+      if (this.newTransaction.inflow && this.newTransaction.outflow) {
+        return
+      }
+      if (!this.newTransaction.inflow && !this.newTransaction.outflow) {
+        return
+      }
+      if (this.newTransaction.inflow) {
+        APITransaction['destination'] = this.$route.params.id
+        APITransaction['amount'] = this.newTransaction.inflow
+        APITransaction['transactions'] = [{
+          'source': this.newTransaction.payee,
+          'destination': this.newTransaction.category,
+          'amount': this.newTransaction.inflow,
+        }]
+      } else if (this.newTransaction.outflow) {
+        APITransaction['source'] = this.$route.params.id
+        APITransaction['amount'] = this.newTransaction.inflow
+        APITransaction['transactions'] = [{
+          'source': this.newTransaction.category,
+          'destination': this.newTransaction.payee,
+          'amount': this.newTransaction.inflow,
+        }]
+      }
+      api.realTransactions.create(APITransaction).then((response) => {
+        console.log(response)
+        this.fetchAccount()
       })
     }
   },
