@@ -31,3 +31,8 @@ class RealTransactionView(BumfViewSet):
         if account_id is not None:
             queryset = queryset.filter(Q(source__id=account_id) | Q(destination__id=account_id))
         return queryset
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return RealTransactionReadSerializer
+        return RealTransactionWriteSerializer
