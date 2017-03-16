@@ -21,7 +21,7 @@ class VirtualTransactionView(BumfViewSet):
 
 
 class RealTransactionView(BumfViewSet):
-    queryset = RealTransaction.objects.all()
+    queryset = RealTransaction.objects.all().order_by('-timestamp')
     serializer_class = RealTransactionReadSerializer
     user_relation = 'dossier__project__user'
 
