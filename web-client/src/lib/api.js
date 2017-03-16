@@ -72,6 +72,10 @@ const api = {
       }
       return api.http('GET', url, null, null)
     },
+    create (transaction) {
+      let url = 'http://127.0.0.1:8000/v1/real-transactions/'
+      return api.http('POST', url, null, transaction)
+    }
   },
 }
 
