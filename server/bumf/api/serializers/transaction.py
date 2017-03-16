@@ -5,7 +5,7 @@ from bumf.api.serializers.account import (
     RealAccountSerializer, VirtualAccountSerializer,
 )
 from bumf.core.models import (
-    Dossier, Project, RealTransaction, VirtualAccount, VirtualTransaction,
+    Dossier, RealTransaction, VirtualAccount, VirtualTransaction,
 )
 
 
