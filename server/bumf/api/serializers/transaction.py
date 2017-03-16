@@ -3,7 +3,9 @@ from rest_framework import serializers
 from bumf.api.serializers.account import (
     RealAccountSerializer, VirtualAccountSerializer,
 )
-from bumf.core.models import Dossier, RealTransaction, VirtualTransaction
+from bumf.core.models import (
+    Dossier, Project, RealTransaction, VirtualAccount, VirtualTransaction,
+)
 
 
 class DossierSerializer(serializers.ModelSerializer):
@@ -13,7 +15,7 @@ class DossierSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class VirtualTransactionSerializer(serializers.ModelSerializer):
+class VirtualTransactionReadSerializer(serializers.ModelSerializer):
     destination = VirtualAccountSerializer()
     source = VirtualAccountSerializer()
 
@@ -22,8 +24,9 @@ class VirtualTransactionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class RealTransactionSerializer(serializers.ModelSerializer):
+class RealTransactionReadSerializer(serializers.ModelSerializer):
     destination = RealAccountSerializer
+    dossier = DossierSerializer
     source = RealAccountSerializer
     transactions = VirtualTransactionSerializer(many=True)
 

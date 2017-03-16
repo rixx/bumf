@@ -1,7 +1,8 @@
 from django.db.models import Q
 
 from bumf.api.serializers import (
-    DossierSerializer, RealTransactionSerializer, VirtualTransactionSerializer,
+    DossierSerializer, RealTransactionReadSerializer,
+    RealTransactionWriteSerializer, VirtualTransactionReadSerializer,
 )
 from bumf.api.views.base import BumfViewSet
 from bumf.core.models import Dossier, RealTransaction, VirtualTransaction
@@ -15,13 +16,13 @@ class DossierView(BumfViewSet):
 
 class VirtualTransactionView(BumfViewSet):
     queryset = VirtualTransaction.objects.all()
-    serializer_class = VirtualTransactionSerializer
+    serializer_class = VirtualTransactionReadSerializer
     user_relation = 'dossier__project__user'
 
 
 class RealTransactionView(BumfViewSet):
     queryset = RealTransaction.objects.all()
-    serializer_class = RealTransactionSerializer
+    serializer_class = RealTransactionReadSerializer
     user_relation = 'dossier__project__user'
 
     def get_queryset(self):
