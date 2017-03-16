@@ -29,14 +29,14 @@
       </tbody>
       <tbody class="transaction-list">
         <template v-for="trans in transactions">
-          <tr v-for="split in trans.transactions" @click="activeTransaction=(split == activeTransaction) ? null : split" :class="{active: split==activeTransaction}">
+          <tr v-for="split in trans.transactions" @click="activeTransaction=(split === activeTransaction) ? null : split" :class="{active: split === activeTransaction}">
             <td class="transaction-date">{{ trans.timestamp | date }}</td>
             <td class="transaction-payee">{{ split.destination.name }}</td>
             <td class="transaction-category">{{ split.source.name }}</td>
             <td class="transaction-comment">{{ split.comment }}</td>
-            <td class="transaction-in" v-if="trans.destination == account.id">{{ split.amount }} €</td>
+            <td class="transaction-in" v-if="trans.destination === account.id">{{ split.amount }} €</td>
             <td class="transaction-in" v-else></td>
-            <td class="transaction-out" v-if="trans.source == account.id">{{ split.amount }} €</td>
+            <td class="transaction-out" v-if="trans.source === account.id">{{ split.amount }} €</td>
             <td class="transaction-out" v-else></td>
           </tr>
         </template>
