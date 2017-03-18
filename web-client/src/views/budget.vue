@@ -47,4 +47,32 @@ export default {
 </script>
 
 <style lang="stylus">
+.budget
+  width: 100%
+
+#budget-header
+  width: 100%
+  background-color: $clr-cyan-700
+  padding: 8px
+
+#budget-table
+  margin: 0
+  table()
+
+  tbody
+    :hover
+      background-color: $clr-grey-200
+    .active, .active :hover
+      background-color: $clr-cyan-500
+
+  tbody td
+    border-bottom: border-separator()
+    height: 0px
+    padding: 8px
+
+  thead th
+    background-color: $clr-cyan-100
+    font-weight: normal
+    padding: 16px
+    height: 0px
 </style>
