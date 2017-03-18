@@ -20,8 +20,7 @@
       </table>
       </div>
       <div class="budget-detail" v-if="activeBudget">
-        {{ activeBudget }}
-        <bunt-button>blubb</bunt-button>
+        <h3 id="active-name">{{ activeBudget.name }}</div>
       </div>
     </div>
   </div>
@@ -65,8 +64,9 @@ export default {
   flex-wrap: nowrap
 
 .budget-detail
-  width: 320px
+  background-color: $clr-cyan-700
   flex-grow: 0
+  width: 320px
 
 #budget-header
   width: 100%
