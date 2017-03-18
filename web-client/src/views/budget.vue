@@ -9,7 +9,7 @@
         <th class="budget-total">Total</th>
       </thead>
       <tbody>
-        <tr v-for="budget in budgets">
+        <tr v-for="budget in budgets" @click="activeBudget=(budget === activeBudget) ? null : budget" :class="{active: budget === activeBudget}">
           <td class="budget-name">{{ budget.name }}</td>
           <td class="budget-in"></td>
           <td class="budget-out"></td>
@@ -25,7 +25,8 @@ export default {
   components: {},
   data () {
     return {
-      budgets: []
+      activeBudget: null,
+      budgets: [],
     }
   },
   computed: {},
