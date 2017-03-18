@@ -3,17 +3,17 @@
     <div id="budget-header"></div>
     <table id="budget-table">
       <thead>
-        <th></th>
-        <th>Budgeted this month</th>
-        <th>Spent this month</th>
-        <th>Total</th>
+        <th class="budget-name"></th>
+        <th class="budget-in">Budgeted this month</th>
+        <th class="budget-out">Spent this month</th>
+        <th class="budget-total">Total</th>
       </thead>
       <tbody>
         <tr v-for="budget in budgets">
-          <td>{{ budget.name }}</td>
-          <td></td>
-          <td></td>
-          <td>{{ budget.total }}</td>
+          <td class="budget-name">{{ budget.name }}</td>
+          <td class="budget-in"></td>
+          <td class="budget-out"></td>
+          <td class="budget-total">{{ budget.total }} €</td>
         </tr>
     </table>
   </div>
@@ -69,6 +69,14 @@ export default {
     border-bottom: border-separator()
     height: 0px
     padding: 8px
+
+  .budget-in, .budget-out
+    text-align: right
+    width: 120px
+
+  .budget-total
+    text-align: right
+    width: 80px
 
   thead th
     background-color: $clr-cyan-100
