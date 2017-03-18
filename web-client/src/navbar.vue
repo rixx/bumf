@@ -62,7 +62,7 @@ export default {
 #nav-user-links
   align-items: baseline
   display: flex
-  flix-direction: row
+  flex-direction: row
   justify-content: space-between
 
   #nav-username
