@@ -64,6 +64,14 @@ const api = {
       return api.http('GET', `http://127.0.0.1:8000/v1/real-accounts/${id}/`, null, null)
     },
   },
+  budgetAccounts: {
+    list () {
+      return api.http('GET', 'http://127.0.0.1:8000/v1/budget-accounts/', null, null)
+    },
+    get (id) {
+      return api.http('GET', `http://127.0.0.1:8000/v1/budget-accounts/${id}/`, null, null)
+    },
+  },
   realTransactions: {
     list (accountId) {
       let url = 'http://127.0.0.1:8000/v1/real-transactions/'
