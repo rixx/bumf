@@ -11,7 +11,9 @@
           <th class="budget-total">Total</th>
         </thead>
         <tbody>
-          <tr v-for="budget in budgets" @click="activeBudget=(budget === activeBudget) ? null : budget" :class="{active: budget === activeBudget}">
+          <budget-template id="budget-template" :model="budgets">
+          </budget-template>
+          <tr v-for="budget in budgets.child_accounts" @click="activeBudget=(budget === activeBudget) ? null : budget" :class="{active: budget === activeBudget}">
             <td class="budget-name">{{ budget.name }}</td>
             <td class="budget-in"></td>
             <td class="budget-out"></td>
@@ -28,12 +30,13 @@
 
 <script>
 import api from 'lib/api'
+import BudgetTemplate from 'components/budget'
 export default {
-  components: {},
+  components: {BudgetTemplate},
   data () {
     return {
       activeBudget: null,
-      budgets: [],
+      budgets: {},
     }
   },
   computed: {},
