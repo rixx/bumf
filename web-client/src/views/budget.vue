@@ -47,7 +47,7 @@ export default {
   methods: {
     fetchBudgets () {
       api.budgetAccounts.list().then((result) => {
-        this.budgets = result
+        this.budgets = {child_accounts: result, name: "root"}
       })
     }
   }
