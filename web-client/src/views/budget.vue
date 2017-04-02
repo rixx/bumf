@@ -10,15 +10,9 @@
           <th class="budget-out">Spent this month</th>
           <th class="budget-total">Total</th>
         </thead>
-        <tbody>
-          <budget-template id="budget-template" :model="budgets">
+          <budget-template id="budget-template" :model="budgets" v-if="budgets">
           </budget-template>
-          <tr v-for="budget in budgets.child_accounts" @click="activeBudget=(budget === activeBudget) ? null : budget" :class="{active: budget === activeBudget}">
-            <td class="budget-name">{{ budget.name }}</td>
-            <td class="budget-in"></td>
-            <td class="budget-out"></td>
-            <td class="budget-total">{{ budget.total }} €</td>
-          </tr>
+          <!--<tr v-for="budget in budgets.child_accounts" @click="activeBudget=(budget === activeBudget) ? null : budget" :class="{active: budget === activeBudget}">-->
       </table>
       </div>
       <div class="budget-detail" v-if="activeBudget">

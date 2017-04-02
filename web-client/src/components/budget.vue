@@ -1,26 +1,50 @@
-<template>
-  <tr>
-    <td>
-      <div
-        :class="{bold: hasChildren}"
-        @click="toggle">
-        <span v-if="hasChildren">[{{open ? '-' : '+'}}]</span>
-      </div>
-      {{ model.name }}
-    </td>
-    <td class="budget-in"></td>
-    <td class="budget-out"></td>
-    <td class="budget-total">{{ model.total }} €</td>
-      <budget-template
-        id="budget-template"
-        v-for="model in model.child_accounts"
-        :model="model">
-      </budget-template>
-  </tr>
-</template>
 <script>
-export default {
+const BudgetTemplate = {
+  name: 'budget-template',
   template: '#budget-template',
+  render: function (createElement) {
+    if (!this.model.child_accounts)
+          return ''
+
+    var flatten = function(arr) {
+        var result = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i])) {
+                result = result.concat(flatten(arr[i]));
+            } else {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+
+    var getChildren = function(element) {
+        if (element.child_accounts && element.child_accounts.length)
+            var children = element.child_accounts.map(getChildren)
+            if (children) {
+                return [element].concat(children)
+            }
+        return element
+    }
+
+    var allBudgets = flatten(getChildren(this.model.child_accounts))
+    var rows = allBudgets.map(function (element) {
+      return createElement(
+        'tr',
+        [
+          createElement('th', element.name),
+          createElement('th', ''),
+          createElement('th', ''),
+          createElement('th', element.total + ' €'),
+        ]
+      ) 
+    })
+    console.log(rows)
+    return createElement(
+      'tbody',
+      rows
+    )
+  },
   props: {
     model: Object
   },
@@ -43,4 +67,5 @@ export default {
     },
   }
 }
+export default BudgetTemplate
 </script>
