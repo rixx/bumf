@@ -1,26 +1,28 @@
-<template>
-  <tr>
-    <td>
-      <div
-        :class="{bold: hasChildren}"
-        @click="toggle">
-        <span v-if="hasChildren">[{{open ? '-' : '+'}}]</span>
-      </div>
-      {{ model.name }}
-    </td>
-    <td class="budget-in"></td>
-    <td class="budget-out"></td>
-    <td class="budget-total">{{ model.total }} €</td>
-      <budget-template
-        id="budget-template"
-        v-for="model in model.child_accounts"
-        :model="model">
-      </budget-template>
-  </tr>
-</template>
 <script>
-export default {
+const BudgetTemplate = {
+  name: 'budget-template',
   template: '#budget-template',
+  render: function (createElement) {
+    var getChildren = function(element) {
+       return element.child_accounts ? element + element.child_accounts.map(getChildren) : element 
+    }
+    var allBudgets = getChildren(this.props.model.child_accounts)
+    rows = allBudgets.map(function (element) {
+      createElement(
+        'tr',
+        [
+          createElement('th', 'something!'),
+          createElement('th'),
+          createElement('th'),
+          createElement('th'),
+        ]
+      ) 
+    })
+    return createElement(
+      'tbody',
+      rows,
+    )
+  },
   props: {
     model: Object
   },
@@ -43,4 +45,5 @@ export default {
     },
   }
 }
+export default BudgetTemplate
 </script>
