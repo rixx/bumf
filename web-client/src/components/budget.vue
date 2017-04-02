@@ -22,6 +22,9 @@ const BudgetTemplate = {
         if (element.child_accounts && element.child_accounts.length)
             var children = element.child_accounts.map(getChildren)
             if (children) {
+                children.every(function (child, index, array) {
+                    child.parentObj = element
+                })
                 return [element].concat(children)
             }
         return element
@@ -32,14 +35,13 @@ const BudgetTemplate = {
       return createElement(
         'tr',
         [
-          createElement('th', element.name),
-          createElement('th', ''),
-          createElement('th', ''),
-          createElement('th', element.total + ' €'),
+          createElement('td', {attrs: {class: 'budget-name'}}, element.name),
+          createElement('td', {attrs: {class: 'budget-in'}}, ''),
+          createElement('td', {attrs: {class: 'budget-out'}}, ''),
+          createElement('td', {attrs: {class: 'budget-total'}}, element.total + ' €'),
         ]
       ) 
     })
-    console.log(rows)
     return createElement(
       'tbody',
       rows
